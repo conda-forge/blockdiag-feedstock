@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/blockdiag-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/blockdiag-{{ version }}.tar.gz
   sha256: dee4195bb87d23654546ba2bf5091480dbf253b409891fce2cd527c91d00a3e2
 
 build:
@@ -14,14 +14,14 @@ build:
     - blockdiag = blockdiag.command:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - setuptools
     - funcparserlib >=1.0.0a0
     - pillow >3.0
@@ -35,6 +35,7 @@ test:
     - blockdiag --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: http://blockdiag.com/
